@@ -1,0 +1,62 @@
+buildscript {
+    ext.kotlin_version = '1.4.30'
+
+    repositories {
+        maven { url "https://repo1.maven.org/maven2" }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+plugins {
+    id("maven-publish")
+}
+
+group 'com.equisoft.plan.sdk'
+version project.findProperty("application.version") ?:  "dev-SNAPSHOT"
+
+wrapper {
+    gradleVersion = '6.8.3'
+    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
+
+apply plugin: 'kotlin'
+
+repositories {
+    maven { url "https://repo1.maven.org/maven2" }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    compile "com.squareup.moshi:moshi-kotlin:1.11.0"
+    compile "com.squareup.okhttp3:okhttp:4.9.0"
+    testCompile "io.kotlintest:kotlintest-runner-junit5:3.4.2"
+}
+
+java {
+    targetCompatibility = JavaVersion.VERSION_13
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "equisoft-plan-sdk"
+            url = uri("https://maven.pkg.github.com/kronostechnologies/equisoft-plan-sdk-kotlin")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
