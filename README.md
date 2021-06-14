@@ -43,12 +43,10 @@ Class | Method | HTTP request | Description
 <a name="documentation-for-models"></a>
 ## Documentation for Models
 
- - [com.equisoft.plan.sdk.models.InlineResponse200](docs/InlineResponse200.md)
- - [com.equisoft.plan.sdk.models.InlineResponse200Data](docs/InlineResponse200Data.md)
- - [com.equisoft.plan.sdk.models.InlineResponse400](docs/InlineResponse400.md)
- - [com.equisoft.plan.sdk.models.InlineResponse400Data](docs/InlineResponse400Data.md)
- - [com.equisoft.plan.sdk.models.InlineResponse500](docs/InlineResponse500.md)
- - [com.equisoft.plan.sdk.models.InlineResponse500Data](docs/InlineResponse500Data.md)
+ - [com.equisoft.plan.sdk.models.CopyFnaResponse](docs/CopyFnaResponse.md)
+ - [com.equisoft.plan.sdk.models.CopyFnaResponseData](docs/CopyFnaResponseData.md)
+ - [com.equisoft.plan.sdk.models.ErrorResponse](docs/ErrorResponse.md)
+ - [com.equisoft.plan.sdk.models.ErrorResponseData](docs/ErrorResponseData.md)
 
 
 <a name="documentation-for-authorization"></a>

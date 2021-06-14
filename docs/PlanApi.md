@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 <a name="copyPlan"></a>
 # **copyPlan**
-> InlineResponse200 copyPlan(fnaUuid, userEmail, newParticipantUuids)
+> CopyFnaResponse copyPlan(fnaUuid, userEmail, newParticipantUuids)
 
 Copy a plan
 
@@ -26,7 +26,7 @@ val fnaUuid : kotlin.String = 8a135829-0d9a-4104-9a95-1fe2871cb82f // kotlin.Str
 val userEmail : kotlin.String = plan@equisoft.com // kotlin.String | Email of the user to which the FNA copy should be assigned.
 val newParticipantUuids : kotlin.Any = {"participant-old-uuid":"participant-new-uuid","5fe2ce28-9834-4f8a-811e-1192b91cf18c":"444e03d3-ad35-4824-97cc-6c5558d2ea7e"} // kotlin.Any | Assign specific uuids to participants of the new fna
 try {
-    val result : InlineResponse200 = apiInstance.copyPlan(fnaUuid, userEmail, newParticipantUuids)
+    val result : CopyFnaResponse = apiInstance.copyPlan(fnaUuid, userEmail, newParticipantUuids)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling PlanApi#copyPlan")
@@ -47,7 +47,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**CopyFnaResponse**](CopyFnaResponse.md)
 
 ### Authorization
 

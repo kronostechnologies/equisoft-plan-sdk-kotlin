@@ -12,9 +12,8 @@
 package com.equisoft.plan.sdk.apis
 
 
-import com.equisoft.plan.sdk.models.InlineResponse200
-import com.equisoft.plan.sdk.models.InlineResponse400
-import com.equisoft.plan.sdk.models.InlineResponse500
+import com.equisoft.plan.sdk.models.CopyFnaResponse
+import com.equisoft.plan.sdk.models.ErrorResponse
 
 import com.equisoft.plan.sdk.infrastructure.ApiClient
 import com.equisoft.plan.sdk.infrastructure.ClientException
@@ -48,22 +47,22 @@ class PlanApi(
     * @param fnaUuid UUID of the FNA to copy 
     * @param userEmail Email of the user to which the FNA copy should be assigned. (optional)
     * @param newParticipantUuids Assign specific uuids to participants of the new fna (optional)
-    * @return InlineResponse200
+    * @return CopyFnaResponse
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun copyPlan(fnaUuid: kotlin.String, userEmail: kotlin.String?, newParticipantUuids: kotlin.Any?) : InlineResponse200 {
+    fun copyPlan(fnaUuid: kotlin.String, userEmail: kotlin.String?, newParticipantUuids: kotlin.Any?) : CopyFnaResponse {
         val localVariableConfig = copyPlanRequestConfig(fnaUuid = fnaUuid, userEmail = userEmail, newParticipantUuids = newParticipantUuids)
 
-        val localVarResponse = request<InlineResponse200>(
+        val localVarResponse = request<CopyFnaResponse>(
             localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as InlineResponse200
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CopyFnaResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
