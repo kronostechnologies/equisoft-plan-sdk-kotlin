@@ -11,22 +11,20 @@
 */
 package com.equisoft.plan.sdk.models
 
+import com.equisoft.plan.sdk.models.V1CopyFnaResponseData
 
 import com.squareup.moshi.Json
 
 /**
  * 
- * @param error 
- * @param errorDescription 
- * @param hint 
+ * @param status 
+ * @param data 
  */
 
-data class ErrorResponse (
-    @Json(name = "error")
-    val error: kotlin.String? = null,
-    @Json(name = "error_description")
-    val errorDescription: kotlin.String? = null,
-    @Json(name = "hint")
-    val hint: kotlin.String? = null
+data class V1CopyFnaResponse (
+    @Json(name = "status")
+    val status: kotlin.String,
+    @Json(name = "data")
+    val data: V1CopyFnaResponseData
 )
 

@@ -11,22 +11,17 @@
 */
 package com.equisoft.plan.sdk.models
 
+import com.equisoft.plan.sdk.models.OrganizationsOrganization
 
 import com.squareup.moshi.Json
 
 /**
  * 
- * @param error 
- * @param errorDescription 
- * @param hint 
+ * @param results 
  */
 
-data class ErrorResponse (
-    @Json(name = "error")
-    val error: kotlin.String? = null,
-    @Json(name = "error_description")
-    val errorDescription: kotlin.String? = null,
-    @Json(name = "hint")
-    val hint: kotlin.String? = null
+data class OrganizationsListOrganizationsResponse (
+    @Json(name = "results")
+    val results: kotlin.collections.List<OrganizationsOrganization>
 )
 

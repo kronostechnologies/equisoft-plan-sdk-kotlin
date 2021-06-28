@@ -11,20 +11,17 @@
 */
 package com.equisoft.plan.sdk.models
 
-import com.equisoft.plan.sdk.models.CopyFnaResponseData
+import com.equisoft.plan.sdk.models.UsersUser
 
 import com.squareup.moshi.Json
 
 /**
  * 
- * @param status 
- * @param data 
+ * @param results 
  */
 
-data class CopyFnaResponse (
-    @Json(name = "status")
-    val status: kotlin.String,
-    @Json(name = "data")
-    val data: CopyFnaResponseData
+data class UsersListUsersResponse (
+    @Json(name = "results")
+    val results: kotlin.collections.List<UsersUser>
 )
 

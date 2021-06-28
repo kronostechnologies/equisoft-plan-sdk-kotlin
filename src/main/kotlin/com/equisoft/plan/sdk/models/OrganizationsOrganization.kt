@@ -16,12 +16,20 @@ import com.squareup.moshi.Json
 
 /**
  * 
- * @param newFnaUuid UUID of the newly created FNA
+ * @param id 
+ * @param accountType 
+ * @param externalDatabase 
+ * @param organizationUuid 
  */
 
-data class CopyFnaResponseData (
-    /* UUID of the newly created FNA */
-    @Json(name = "new_fna_uuid")
-    val newFnaUuid: kotlin.String
+data class OrganizationsOrganization (
+    @Json(name = "id")
+    val id: kotlin.Int,
+    @Json(name = "accountType")
+    val accountType: kotlin.String,
+    @Json(name = "externalDatabase")
+    val externalDatabase: kotlin.String? = null,
+    @Json(name = "organizationUuid")
+    val organizationUuid: kotlin.String? = null
 )
 

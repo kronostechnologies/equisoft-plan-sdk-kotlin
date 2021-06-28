@@ -1,10 +1,10 @@
 
-# CopyFnaResponseData
+# UsersListUsersResponse
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**newFnaUuid** | **kotlin.String** | UUID of the newly created FNA | 
+**results** | [**kotlin.collections.List&lt;UsersUser&gt;**](UsersUser.md) |  | 
 
 
 

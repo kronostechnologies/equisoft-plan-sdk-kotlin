@@ -16,17 +16,12 @@ import com.squareup.moshi.Json
 
 /**
  * 
- * @param error 
- * @param errorDescription 
- * @param hint 
+ * @param newFnaUuid UUID of the newly created FNA
  */
 
-data class ErrorResponse (
-    @Json(name = "error")
-    val error: kotlin.String? = null,
-    @Json(name = "error_description")
-    val errorDescription: kotlin.String? = null,
-    @Json(name = "hint")
-    val hint: kotlin.String? = null
+data class V1CopyFnaResponseData (
+    /* UUID of the newly created FNA */
+    @Json(name = "new_fna_uuid")
+    val newFnaUuid: kotlin.String
 )
 

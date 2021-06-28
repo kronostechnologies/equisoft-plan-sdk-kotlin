@@ -20,7 +20,7 @@ import com.squareup.moshi.Json
  * @param errorKey Invalid request error key
  */
 
-data class ErrorResponseData (
+data class V1ErrorResponseData (
     /* Reason why the query is invalid */
     @Json(name = "message")
     val message: kotlin.String,

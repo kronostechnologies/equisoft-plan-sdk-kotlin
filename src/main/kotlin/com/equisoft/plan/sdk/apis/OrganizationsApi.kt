@@ -12,8 +12,10 @@
 package com.equisoft.plan.sdk.apis
 
 
-import com.equisoft.plan.sdk.models.CopyFnaResponse
 import com.equisoft.plan.sdk.models.ErrorResponse
+import com.equisoft.plan.sdk.models.OrganizationsListOrganizationsResponse
+import com.equisoft.plan.sdk.models.OrganizationsOrganization
+import com.equisoft.plan.sdk.models.UsersListUsersResponse
 
 import com.equisoft.plan.sdk.infrastructure.ApiClient
 import com.equisoft.plan.sdk.infrastructure.ClientException
@@ -27,7 +29,7 @@ import com.equisoft.plan.sdk.infrastructure.ResponseType
 import com.equisoft.plan.sdk.infrastructure.Success
 import com.equisoft.plan.sdk.infrastructure.toMultiValue
 
-class PlanApi(
+class OrganizationsApi(
     basePath: kotlin.String = defaultBasePath,
     accessToken: String? = null
 ) : ApiClient(
@@ -42,27 +44,25 @@ class PlanApi(
     }
 
     /**
-    * Copy a plan
     * 
-    * @param fnaUuid UUID of the FNA to copy 
-    * @param userEmail Email of the user to which the FNA copy should be assigned. (optional)
-    * @param newParticipantUuids Assign specific uuids to participants of the new fna (optional)
-    * @return CopyFnaResponse
+    * 
+    * @param id  
+    * @return OrganizationsOrganization
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
     @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun copyPlan(fnaUuid: kotlin.String, userEmail: kotlin.String?, newParticipantUuids: kotlin.Any?) : CopyFnaResponse {
-        val localVariableConfig = copyPlanRequestConfig(fnaUuid = fnaUuid, userEmail = userEmail, newParticipantUuids = newParticipantUuids)
+    fun getOrganization(id: kotlin.Int) : OrganizationsOrganization {
+        val localVariableConfig = getOrganizationRequestConfig(id = id)
 
-        val localVarResponse = request<CopyFnaResponse>(
+        val localVarResponse = request<OrganizationsOrganization>(
             localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CopyFnaResponse
+            ResponseType.Success -> (localVarResponse as Success<*>).data as OrganizationsOrganization
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -77,84 +77,19 @@ class PlanApi(
     }
 
     /**
-    * To obtain the request config of the operation copyPlan
+    * To obtain the request config of the operation getOrganization
     *
-    * @param fnaUuid UUID of the FNA to copy 
-    * @param userEmail Email of the user to which the FNA copy should be assigned. (optional)
-    * @param newParticipantUuids Assign specific uuids to participants of the new fna (optional)
+    * @param id  
     * @return RequestConfig
     */
-    fun copyPlanRequestConfig(fnaUuid: kotlin.String, userEmail: kotlin.String?, newParticipantUuids: kotlin.Any?) : RequestConfig {
-        val localVariableBody: kotlin.Any? = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
-            .apply {
-                put("fna-uuid", listOf(fnaUuid.toString()))
-                if (userEmail != null) {
-                    put("user-email", listOf(userEmail.toString()))
-                }
-                if (newParticipantUuids != null) {
-                    put("new-participant-uuids", listOf(newParticipantUuids.toString()))
-                }
-            }
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-
-        val localVariableConfig = RequestConfig(
-            method = RequestMethod.POST,
-            path = "/fna/api/cmd/fna/copy",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            body = localVariableBody
-        )
-
-        return localVariableConfig
-    }
-
-    /**
-    * Returns the plan
-    * 
-    * @param id Fna id 
-    * @return void
-    * @throws UnsupportedOperationException If the API returns an informational or redirection response
-    * @throws ClientException If the API returns a client error response
-    * @throws ServerException If the API returns a server error response
-    */
-    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getPlan(id: kotlin.Int) : Unit {
-        val localVariableConfig = getPlanRequestConfig(id = id)
-
-        val localVarResponse = request<Any?>(
-            localVariableConfig
-        )
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-    * To obtain the request config of the operation getPlan
-    *
-    * @param id Fna id 
-    * @return RequestConfig
-    */
-    fun getPlanRequestConfig(id: kotlin.Int) : RequestConfig {
+    fun getOrganizationRequestConfig(id: kotlin.Int) : RequestConfig {
         val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
 
         val localVariableConfig = RequestConfig(
             method = RequestMethod.GET,
-            path = "/fna/api/fna/{id}".replace("{"+"id"+"}", "$id"),
+            path = "/fna/api/v2/organizations/{id}".replace("{"+"id"+"}", "$id"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
@@ -164,26 +99,25 @@ class PlanApi(
     }
 
     /**
-    * Update client UUID id of an FNA
     * 
-    * @param fnaUuid UUID of the FNA 
-    * @param clientUuid UUID of the client to update 
-    * @param body New UUID of the client 
-    * @return void
+    * 
+    * @param id  
+    * @return UsersListUsersResponse
     * @throws UnsupportedOperationException If the API returns an informational or redirection response
     * @throws ClientException If the API returns a client error response
     * @throws ServerException If the API returns a server error response
     */
+    @Suppress("UNCHECKED_CAST")
     @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun updatePlanExternalId(fnaUuid: kotlin.String, clientUuid: kotlin.String, body: kotlin.String) : Unit {
-        val localVariableConfig = updatePlanExternalIdRequestConfig(fnaUuid = fnaUuid, clientUuid = clientUuid, body = body)
+    fun listOrganizationUsers(id: kotlin.Int) : UsersListUsersResponse {
+        val localVariableConfig = listOrganizationUsersRequestConfig(id = id)
 
-        val localVarResponse = request<Any?>(
+        val localVarResponse = request<UsersListUsersResponse>(
             localVariableConfig
         )
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> Unit
+            ResponseType.Success -> (localVarResponse as Success<*>).data as UsersListUsersResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -198,21 +132,77 @@ class PlanApi(
     }
 
     /**
-    * To obtain the request config of the operation updatePlanExternalId
+    * To obtain the request config of the operation listOrganizationUsers
     *
-    * @param fnaUuid UUID of the FNA 
-    * @param clientUuid UUID of the client to update 
-    * @param body New UUID of the client 
+    * @param id  
     * @return RequestConfig
     */
-    fun updatePlanExternalIdRequestConfig(fnaUuid: kotlin.String, clientUuid: kotlin.String, body: kotlin.String) : RequestConfig {
-        val localVariableBody: kotlin.Any? = body
+    fun listOrganizationUsersRequestConfig(id: kotlin.Int) : RequestConfig {
+        val localVariableBody: kotlin.Any? = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
 
         val localVariableConfig = RequestConfig(
-            method = RequestMethod.PUT,
-            path = "/fna/{fna-uuid}/client/{client-uuid}/external-id".replace("{"+"fna-uuid"+"}", "$fnaUuid").replace("{"+"client-uuid"+"}", "$clientUuid"),
+            method = RequestMethod.GET,
+            path = "/fna/api/v2/organizations/{id}/users".replace("{"+"id"+"}", "$id"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+
+        return localVariableConfig
+    }
+
+    /**
+    * 
+    * 
+    * @param organizationUuid  
+    * @return OrganizationsListOrganizationsResponse
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun listOrganizations(organizationUuid: kotlin.String) : OrganizationsListOrganizationsResponse {
+        val localVariableConfig = listOrganizationsRequestConfig(organizationUuid = organizationUuid)
+
+        val localVarResponse = request<OrganizationsListOrganizationsResponse>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as OrganizationsListOrganizationsResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation listOrganizations
+    *
+    * @param organizationUuid  
+    * @return RequestConfig
+    */
+    fun listOrganizationsRequestConfig(organizationUuid: kotlin.String) : RequestConfig {
+        val localVariableBody: kotlin.Any? = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+            .apply {
+                put("organizationUuid", listOf(organizationUuid.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        val localVariableConfig = RequestConfig(
+            method = RequestMethod.GET,
+            path = "/fna/api/v2/organizations",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody

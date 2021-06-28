@@ -1,11 +1,11 @@
 
-# CopyFnaResponse
+# V1ErrorResponse
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **status** | **kotlin.String** |  | 
-**data** | [**CopyFnaResponseData**](CopyFnaResponseData.md) |  | 
+**data** | [**V1ErrorResponseData**](V1ErrorResponseData.md) |  |  [optional]
 
 
 

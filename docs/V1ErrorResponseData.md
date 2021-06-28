@@ -1,5 +1,5 @@
 
-# ErrorResponseData
+# V1ErrorResponseData
 
 ## Properties
 Name | Type | Description | Notes

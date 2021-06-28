@@ -35,18 +35,27 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*PlanApi* | [**copyPlan**](docs/PlanApi.md#copyplan) | **POST** /fna/api/cmd/fna/copy | Copy a plan
-*PlanApi* | [**getPlan**](docs/PlanApi.md#getplan) | **GET** /fna/api/fna/{id} | Returns the plan
-*PlanApi* | [**updatePlanExternalId**](docs/PlanApi.md#updateplanexternalid) | **PUT** /fna/{fna-uuid}/client/{client-uuid}/external-id | Update client UUID id of an FNA
+*OrganizationsApi* | [**getOrganization**](docs/OrganizationsApi.md#getorganization) | **GET** /fna/api/v2/organizations/{id} | 
+*OrganizationsApi* | [**listOrganizationUsers**](docs/OrganizationsApi.md#listorganizationusers) | **GET** /fna/api/v2/organizations/{id}/users | 
+*OrganizationsApi* | [**listOrganizations**](docs/OrganizationsApi.md#listorganizations) | **GET** /fna/api/v2/organizations | 
+*PlansV1Api* | [**copyPlan**](docs/PlansV1Api.md#copyplan) | **POST** /fna/api/cmd/fna/copy | Copy a plan
+*PlansV1Api* | [**getPlan**](docs/PlansV1Api.md#getplan) | **GET** /fna/api/fna/{id} | Returns the plan
+*PlansV1Api* | [**updatePlanExternalId**](docs/PlansV1Api.md#updateplanexternalid) | **PUT** /fna/{fna-uuid}/client/{client-uuid}/external-id | Update client UUID id of an FNA
+*UsersApi* | [**getUser**](docs/UsersApi.md#getuser) | **GET** /fna/api/v2/users/{id} | 
 
 
 <a name="documentation-for-models"></a>
 ## Documentation for Models
 
- - [com.equisoft.plan.sdk.models.CopyFnaResponse](docs/CopyFnaResponse.md)
- - [com.equisoft.plan.sdk.models.CopyFnaResponseData](docs/CopyFnaResponseData.md)
  - [com.equisoft.plan.sdk.models.ErrorResponse](docs/ErrorResponse.md)
- - [com.equisoft.plan.sdk.models.ErrorResponseData](docs/ErrorResponseData.md)
+ - [com.equisoft.plan.sdk.models.OrganizationsListOrganizationsResponse](docs/OrganizationsListOrganizationsResponse.md)
+ - [com.equisoft.plan.sdk.models.OrganizationsOrganization](docs/OrganizationsOrganization.md)
+ - [com.equisoft.plan.sdk.models.UsersListUsersResponse](docs/UsersListUsersResponse.md)
+ - [com.equisoft.plan.sdk.models.UsersUser](docs/UsersUser.md)
+ - [com.equisoft.plan.sdk.models.V1CopyFnaResponse](docs/V1CopyFnaResponse.md)
+ - [com.equisoft.plan.sdk.models.V1CopyFnaResponseData](docs/V1CopyFnaResponseData.md)
+ - [com.equisoft.plan.sdk.models.V1ErrorResponse](docs/V1ErrorResponse.md)
+ - [com.equisoft.plan.sdk.models.V1ErrorResponseData](docs/V1ErrorResponseData.md)
 
 
 <a name="documentation-for-authorization"></a>
