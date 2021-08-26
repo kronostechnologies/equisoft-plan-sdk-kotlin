@@ -35,10 +35,10 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*CommandApi* | [**cmdCopyFNA**](docs/CommandApi.md#cmdcopyfna) | **POST** /fna/api/v2/cmd/copy/fna | 
 *OrganizationsApi* | [**getOrganization**](docs/OrganizationsApi.md#getorganization) | **GET** /fna/api/v2/organizations/{id} | 
 *OrganizationsApi* | [**listOrganizationUsers**](docs/OrganizationsApi.md#listorganizationusers) | **GET** /fna/api/v2/organizations/{id}/users | 
 *OrganizationsApi* | [**listOrganizations**](docs/OrganizationsApi.md#listorganizations) | **GET** /fna/api/v2/organizations | 
-*PlansV1Api* | [**copyPlan**](docs/PlansV1Api.md#copyplan) | **POST** /fna/api/cmd/fna/copy | Copy a plan
 *PlansV1Api* | [**getPlan**](docs/PlansV1Api.md#getplan) | **GET** /fna/api/fna/{id} | Returns the plan
 *PlansV1Api* | [**updatePlanExternalId**](docs/PlansV1Api.md#updateplanexternalid) | **PUT** /fna/{fna-uuid}/client/{client-uuid}/external-id | Update client UUID id of an FNA
 *UsersApi* | [**getUser**](docs/UsersApi.md#getuser) | **GET** /fna/api/v2/users/{id} | 
@@ -47,6 +47,8 @@ Class | Method | HTTP request | Description
 <a name="documentation-for-models"></a>
 ## Documentation for Models
 
+ - [com.equisoft.plan.sdk.models.CmdCopyFNA](docs/CmdCopyFNA.md)
+ - [com.equisoft.plan.sdk.models.CmdCopyFNAResponse](docs/CmdCopyFNAResponse.md)
  - [com.equisoft.plan.sdk.models.ErrorResponse](docs/ErrorResponse.md)
  - [com.equisoft.plan.sdk.models.OrganizationsListOrganizationsResponse](docs/OrganizationsListOrganizationsResponse.md)
  - [com.equisoft.plan.sdk.models.OrganizationsOrganization](docs/OrganizationsOrganization.md)

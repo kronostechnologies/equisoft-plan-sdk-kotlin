@@ -9,8 +9,7 @@
 * https://openapi-generator.tech
 * Do not edit the class manually.
 */
-package com.equisoft.plan.sdk.apis
-
+package com.equisoft.plan.sdk
 
 import com.equisoft.plan.sdk.models.ErrorResponse
 import com.equisoft.plan.sdk.models.UsersUser
@@ -30,10 +29,7 @@ import com.equisoft.plan.sdk.infrastructure.toMultiValue
 class UsersApi(
     basePath: kotlin.String = defaultBasePath,
     accessToken: String? = null
-) : ApiClient(
-    basePath,
-    accessToken
-) {
+) : ApiClient(basePath, accessToken) {
     companion object {
         @JvmStatic
         val defaultBasePath: String by lazy {
@@ -55,7 +51,7 @@ class UsersApi(
     fun getUser(id: kotlin.Int) : UsersUser {
         val localVariableConfig = getUserRequestConfig(id = id)
 
-        val localVarResponse = request<UsersUser>(
+        val localVarResponse = request<Unit, UsersUser>(
             localVariableConfig
         )
 
@@ -80,20 +76,18 @@ class UsersApi(
     * @param id  
     * @return RequestConfig
     */
-    fun getUserRequestConfig(id: kotlin.Int) : RequestConfig {
-        val localVariableBody: kotlin.Any? = null
+    fun getUserRequestConfig(id: kotlin.Int) : RequestConfig<Unit> {
+        val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
 
-        val localVariableConfig = RequestConfig(
+        return RequestConfig(
             method = RequestMethod.GET,
             path = "/fna/api/v2/users/{id}".replace("{"+"id"+"}", "$id"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
         )
-
-        return localVariableConfig
     }
 
 }
