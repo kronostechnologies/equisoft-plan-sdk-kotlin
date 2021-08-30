@@ -9,8 +9,7 @@
 * https://openapi-generator.tech
 * Do not edit the class manually.
 */
-package com.equisoft.plan.sdk.apis
-
+package com.equisoft.plan.sdk
 
 import com.equisoft.plan.sdk.models.ErrorResponse
 import com.equisoft.plan.sdk.models.OrganizationsListOrganizationsResponse
@@ -32,10 +31,7 @@ import com.equisoft.plan.sdk.infrastructure.toMultiValue
 class OrganizationsApi(
     basePath: kotlin.String = defaultBasePath,
     accessToken: String? = null
-) : ApiClient(
-    basePath,
-    accessToken
-) {
+) : ApiClient(basePath, accessToken) {
     companion object {
         @JvmStatic
         val defaultBasePath: String by lazy {
@@ -57,7 +53,7 @@ class OrganizationsApi(
     fun getOrganization(id: kotlin.Int) : OrganizationsOrganization {
         val localVariableConfig = getOrganizationRequestConfig(id = id)
 
-        val localVarResponse = request<OrganizationsOrganization>(
+        val localVarResponse = request<Unit, OrganizationsOrganization>(
             localVariableConfig
         )
 
@@ -82,20 +78,18 @@ class OrganizationsApi(
     * @param id  
     * @return RequestConfig
     */
-    fun getOrganizationRequestConfig(id: kotlin.Int) : RequestConfig {
-        val localVariableBody: kotlin.Any? = null
+    fun getOrganizationRequestConfig(id: kotlin.Int) : RequestConfig<Unit> {
+        val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
 
-        val localVariableConfig = RequestConfig(
+        return RequestConfig(
             method = RequestMethod.GET,
             path = "/fna/api/v2/organizations/{id}".replace("{"+"id"+"}", "$id"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
         )
-
-        return localVariableConfig
     }
 
     /**
@@ -112,7 +106,7 @@ class OrganizationsApi(
     fun listOrganizationUsers(id: kotlin.Int) : UsersListUsersResponse {
         val localVariableConfig = listOrganizationUsersRequestConfig(id = id)
 
-        val localVarResponse = request<UsersListUsersResponse>(
+        val localVarResponse = request<Unit, UsersListUsersResponse>(
             localVariableConfig
         )
 
@@ -137,20 +131,18 @@ class OrganizationsApi(
     * @param id  
     * @return RequestConfig
     */
-    fun listOrganizationUsersRequestConfig(id: kotlin.Int) : RequestConfig {
-        val localVariableBody: kotlin.Any? = null
+    fun listOrganizationUsersRequestConfig(id: kotlin.Int) : RequestConfig<Unit> {
+        val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
 
-        val localVariableConfig = RequestConfig(
+        return RequestConfig(
             method = RequestMethod.GET,
             path = "/fna/api/v2/organizations/{id}/users".replace("{"+"id"+"}", "$id"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
         )
-
-        return localVariableConfig
     }
 
     /**
@@ -167,7 +159,7 @@ class OrganizationsApi(
     fun listOrganizations(organizationUuid: kotlin.String) : OrganizationsListOrganizationsResponse {
         val localVariableConfig = listOrganizationsRequestConfig(organizationUuid = organizationUuid)
 
-        val localVarResponse = request<OrganizationsListOrganizationsResponse>(
+        val localVarResponse = request<Unit, OrganizationsListOrganizationsResponse>(
             localVariableConfig
         )
 
@@ -192,23 +184,21 @@ class OrganizationsApi(
     * @param organizationUuid  
     * @return RequestConfig
     */
-    fun listOrganizationsRequestConfig(organizationUuid: kotlin.String) : RequestConfig {
-        val localVariableBody: kotlin.Any? = null
+    fun listOrganizationsRequestConfig(organizationUuid: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
             .apply {
                 put("organizationUuid", listOf(organizationUuid.toString()))
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
 
-        val localVariableConfig = RequestConfig(
+        return RequestConfig(
             method = RequestMethod.GET,
             path = "/fna/api/v2/organizations",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
         )
-
-        return localVariableConfig
     }
 
 }

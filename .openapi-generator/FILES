@@ -1,5 +1,8 @@
 README.md
 build.gradle
+docs/CmdCopyFNA.md
+docs/CmdCopyFNAResponse.md
+docs/CommandApi.md
 docs/ErrorResponse.md
 docs/OrganizationsApi.md
 docs/OrganizationsListOrganizationsResponse.md
@@ -17,13 +20,13 @@ gradle/wrapper/gradle-wrapper.properties
 gradlew
 gradlew.bat
 settings.gradle
-src/main/kotlin/com/equisoft/plan/sdk/apis/OrganizationsApi.kt
-src/main/kotlin/com/equisoft/plan/sdk/apis/PlansV1Api.kt
-src/main/kotlin/com/equisoft/plan/sdk/apis/UsersApi.kt
+src/main/kotlin/com/equisoft/plan/sdk/CommandApi.kt
+src/main/kotlin/com/equisoft/plan/sdk/OrganizationsApi.kt
+src/main/kotlin/com/equisoft/plan/sdk/PlansV1Api.kt
+src/main/kotlin/com/equisoft/plan/sdk/UsersApi.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/ApiAbstractions.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/ApiClient.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/ApiInfrastructureResponse.kt
-src/main/kotlin/com/equisoft/plan/sdk/infrastructure/ApplicationDelegates.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/BigDecimalAdapter.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/BigIntegerAdapter.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/ByteArrayAdapter.kt
@@ -35,7 +38,10 @@ src/main/kotlin/com/equisoft/plan/sdk/infrastructure/RequestConfig.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/RequestMethod.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/ResponseExtensions.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/Serializer.kt
+src/main/kotlin/com/equisoft/plan/sdk/infrastructure/URIAdapter.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/UUIDAdapter.kt
+src/main/kotlin/com/equisoft/plan/sdk/models/CmdCopyFNA.kt
+src/main/kotlin/com/equisoft/plan/sdk/models/CmdCopyFNAResponse.kt
 src/main/kotlin/com/equisoft/plan/sdk/models/ErrorResponse.kt
 src/main/kotlin/com/equisoft/plan/sdk/models/OrganizationsListOrganizationsResponse.kt
 src/main/kotlin/com/equisoft/plan/sdk/models/OrganizationsOrganization.kt
