@@ -54,8 +54,6 @@ Class | Method | HTTP request | Description
  - [com.equisoft.plan.sdk.models.OrganizationsOrganization](docs/OrganizationsOrganization.md)
  - [com.equisoft.plan.sdk.models.UsersListUsersResponse](docs/UsersListUsersResponse.md)
  - [com.equisoft.plan.sdk.models.UsersUser](docs/UsersUser.md)
- - [com.equisoft.plan.sdk.models.V1CopyFnaResponse](docs/V1CopyFnaResponse.md)
- - [com.equisoft.plan.sdk.models.V1CopyFnaResponseData](docs/V1CopyFnaResponseData.md)
  - [com.equisoft.plan.sdk.models.V1ErrorResponse](docs/V1ErrorResponse.md)
  - [com.equisoft.plan.sdk.models.V1ErrorResponseData](docs/V1ErrorResponseData.md)
 
@@ -73,4 +71,6 @@ Class | Method | HTTP request | Description
   - fna:fna: Grants all access to plan/fna (deprecated)
   - plan:plan: Grants all access to plan/fna
   - plan:plan:create: Creation access on plan
+  - plan:organization: Grants all access to plan/organizations
+  - plan:user: Grants all access to plan/users
 
