@@ -1,5 +1,5 @@
 group 'com.equisoft.plan.sdk'
-version '6.50.1-SNAPSHOT'
+version '6.50.2-SNAPSHOT'
 
 buildscript {
     ext.kotlin_version = '1.5.10'
