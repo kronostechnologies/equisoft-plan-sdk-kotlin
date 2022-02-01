@@ -7,6 +7,9 @@ docs/ErrorResponse.md
 docs/OrganizationsApi.md
 docs/OrganizationsListOrganizationsResponse.md
 docs/OrganizationsOrganization.md
+docs/PlansApi.md
+docs/PlansListPlansResponse.md
+docs/PlansPlan.md
 docs/PlansV1Api.md
 docs/UsersApi.md
 docs/UsersListUsersResponse.md
@@ -20,6 +23,7 @@ gradlew.bat
 settings.gradle
 src/main/kotlin/com/equisoft/plan/sdk/CommandApi.kt
 src/main/kotlin/com/equisoft/plan/sdk/OrganizationsApi.kt
+src/main/kotlin/com/equisoft/plan/sdk/PlansApi.kt
 src/main/kotlin/com/equisoft/plan/sdk/PlansV1Api.kt
 src/main/kotlin/com/equisoft/plan/sdk/UsersApi.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/ApiAbstractions.kt
@@ -43,6 +47,8 @@ src/main/kotlin/com/equisoft/plan/sdk/models/CmdCopyFNAResponse.kt
 src/main/kotlin/com/equisoft/plan/sdk/models/ErrorResponse.kt
 src/main/kotlin/com/equisoft/plan/sdk/models/OrganizationsListOrganizationsResponse.kt
 src/main/kotlin/com/equisoft/plan/sdk/models/OrganizationsOrganization.kt
+src/main/kotlin/com/equisoft/plan/sdk/models/PlansListPlansResponse.kt
+src/main/kotlin/com/equisoft/plan/sdk/models/PlansPlan.kt
 src/main/kotlin/com/equisoft/plan/sdk/models/UsersListUsersResponse.kt
 src/main/kotlin/com/equisoft/plan/sdk/models/UsersUser.kt
 src/main/kotlin/com/equisoft/plan/sdk/models/V1ErrorResponse.kt
