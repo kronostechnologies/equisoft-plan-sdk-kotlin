@@ -1,6 +1,11 @@
 group 'com.equisoft.plan.sdk'
 version '6.62.1-SNAPSHOT'
 
+wrapper {
+    gradleVersion = '7.4.2'
+    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
+
 buildscript {
     ext.kotlin_version = '1.5.10'
 
@@ -32,11 +37,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     implementation "com.squareup.moshi:moshi-kotlin:1.12.0"
+    implementation "com.squareup.moshi:moshi-adapters:1.12.0"
     implementation "com.squareup.okhttp3:okhttp:4.9.1"
     testImplementation "io.kotlintest:kotlintest-runner-junit5:3.4.2"
-}
-
-wrapper {
-    gradleVersion = '6.8.3'
-    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
 }

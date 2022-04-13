@@ -5,23 +5,23 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **kotlin.Int** |  | 
-**type** | [**inline**](#TypeEnum) |  | 
+**type** | [**inline**](#Type) |  | 
 **modifiedDate** | **kotlin.String** |  | 
 **clientDisplayName** | **kotlin.String** |  | 
-**status** | [**inline**](#StatusEnum) |  | 
+**status** | [**inline**](#Status) |  | 
 **statusDate** | **kotlin.String** |  | 
 **url** | **kotlin.String** |  | 
 **spouseDisplayName** | **kotlin.String** |  |  [optional]
 
 
-<a name="TypeEnum"></a>
+<a name="Type"></a>
 ## Enum: type
 Name | Value
 ---- | -----
 type | INDIVIDUAL, SPOUSAL
 
 
-<a name="StatusEnum"></a>
+<a name="Status"></a>
 ## Enum: status
 Name | Value
 ---- | -----
