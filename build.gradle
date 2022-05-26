@@ -1,5 +1,5 @@
 group 'com.equisoft.plan.sdk'
-version '6.65.2'
+version '6.65.3-SNAPSHOT'
 
 wrapper {
     gradleVersion = '7.4.2'
