@@ -22,6 +22,7 @@ package com.equisoft.plan.sdk
 
 import com.equisoft.plan.sdk.models.ErrorResponse
 import com.equisoft.plan.sdk.models.UsersUser
+import com.equisoft.plan.sdk.models.UsersUserContext
 
 import com.equisoft.plan.sdk.infrastructure.ApiClient
 import com.equisoft.plan.sdk.infrastructure.ClientException
@@ -93,6 +94,57 @@ class UsersApi(
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/fna/api/v2/users/{id}".replace("{"+"id"+"}", "$id"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            body = localVariableBody
+        )
+    }
+
+    /**
+    * 
+    * 
+    * @return UsersUserContext
+    * @throws UnsupportedOperationException If the API returns an informational or redirection response
+    * @throws ClientException If the API returns a client error response
+    * @throws ServerException If the API returns a server error response
+    */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getUserContext() : UsersUserContext {
+        val localVariableConfig = getUserContextRequestConfig()
+
+        val localVarResponse = request<Unit, UsersUserContext>(
+            localVariableConfig
+        )
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as UsersUserContext
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+    * To obtain the request config of the operation getUserContext
+    *
+    * @return RequestConfig
+    */
+    fun getUserContextRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/fna/api/v2/userContext",
             query = localVariableQuery,
             headers = localVariableHeaders,
             body = localVariableBody
