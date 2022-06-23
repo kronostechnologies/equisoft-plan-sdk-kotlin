@@ -43,7 +43,6 @@ Class | Method | HTTP request | Description
 *PlansV1Api* | [**getPlan**](docs/PlansV1Api.md#getplan) | **GET** /fna/api/fna/{id} | Returns the plan
 *PlansV1Api* | [**updatePlanExternalId**](docs/PlansV1Api.md#updateplanexternalid) | **PUT** /fna/{fna-uuid}/client/{client-uuid}/external-id | Update client UUID id of an FNA
 *UsersApi* | [**getUser**](docs/UsersApi.md#getuser) | **GET** /fna/api/v2/users/{id} | 
-*UsersApi* | [**getUserContext**](docs/UsersApi.md#getusercontext) | **GET** /fna/api/v2/userContext | 
 
 
 <a name="documentation-for-models"></a>
@@ -58,7 +57,6 @@ Class | Method | HTTP request | Description
  - [com.equisoft.plan.sdk.models.PlansPlan](docs/PlansPlan.md)
  - [com.equisoft.plan.sdk.models.UsersListUsersResponse](docs/UsersListUsersResponse.md)
  - [com.equisoft.plan.sdk.models.UsersUser](docs/UsersUser.md)
- - [com.equisoft.plan.sdk.models.UsersUserContext](docs/UsersUserContext.md)
  - [com.equisoft.plan.sdk.models.V1ErrorResponse](docs/V1ErrorResponse.md)
  - [com.equisoft.plan.sdk.models.V1ErrorResponseData](docs/V1ErrorResponseData.md)
 
