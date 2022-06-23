@@ -14,6 +14,7 @@ docs/PlansV1Api.md
 docs/UsersApi.md
 docs/UsersListUsersResponse.md
 docs/UsersUser.md
+docs/UsersUserContext.md
 docs/V1ErrorResponse.md
 docs/V1ErrorResponseData.md
 gradle/wrapper/gradle-wrapper.jar
@@ -51,5 +52,6 @@ src/main/kotlin/com/equisoft/plan/sdk/models/PlansListPlansResponse.kt
 src/main/kotlin/com/equisoft/plan/sdk/models/PlansPlan.kt
 src/main/kotlin/com/equisoft/plan/sdk/models/UsersListUsersResponse.kt
 src/main/kotlin/com/equisoft/plan/sdk/models/UsersUser.kt
+src/main/kotlin/com/equisoft/plan/sdk/models/UsersUserContext.kt
 src/main/kotlin/com/equisoft/plan/sdk/models/V1ErrorResponse.kt
 src/main/kotlin/com/equisoft/plan/sdk/models/V1ErrorResponseData.kt
