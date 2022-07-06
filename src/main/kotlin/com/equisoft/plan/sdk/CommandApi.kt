@@ -20,16 +20,23 @@
 
 package com.equisoft.plan.sdk
 
+import java.io.IOException
+import okhttp3.OkHttpClient
+
 import com.equisoft.plan.sdk.models.CmdCopyFNA
 import com.equisoft.plan.sdk.models.CmdCopyFNAResponse
 import com.equisoft.plan.sdk.models.ErrorResponse
 
+import com.squareup.moshi.Json
+
 import com.equisoft.plan.sdk.infrastructure.ApiClient
+import com.equisoft.plan.sdk.infrastructure.ApiResponse
 import com.equisoft.plan.sdk.infrastructure.ClientException
 import com.equisoft.plan.sdk.infrastructure.ClientError
 import com.equisoft.plan.sdk.infrastructure.ServerException
 import com.equisoft.plan.sdk.infrastructure.ServerError
 import com.equisoft.plan.sdk.infrastructure.MultiValueMap
+import com.equisoft.plan.sdk.infrastructure.PartConfig
 import com.equisoft.plan.sdk.infrastructure.RequestConfig
 import com.equisoft.plan.sdk.infrastructure.RequestMethod
 import com.equisoft.plan.sdk.infrastructure.ResponseType
@@ -38,32 +45,32 @@ import com.equisoft.plan.sdk.infrastructure.toMultiValue
 
 class CommandApi(
     basePath: kotlin.String = defaultBasePath,
-    accessToken: String? = null
-) : ApiClient(basePath, accessToken) {
+    accessToken: String? = null,
+    client: OkHttpClient = ApiClient.defaultClient
+) : ApiClient(basePath, accessToken, client) {
+
     companion object {
         @JvmStatic
         val defaultBasePath: String by lazy {
-            System.getProperties().getProperty("com.equisoft.plan.sdk.baseUrl", "http://localhost")
+            System.getProperties().getProperty(ApiClient.baseUrlKey, "http://localhost")
         }
     }
 
     /**
-    * 
-    * 
-    * @param cmdCopyFNA  
-    * @return CmdCopyFNAResponse
-    * @throws UnsupportedOperationException If the API returns an informational or redirection response
-    * @throws ClientException If the API returns a client error response
-    * @throws ServerException If the API returns a server error response
-    */
+     * 
+     * 
+     * @param cmdCopyFNA 
+     * @return CmdCopyFNAResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
     @Suppress("UNCHECKED_CAST")
-    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
     fun cmdCopyFNA(cmdCopyFNA: CmdCopyFNA) : CmdCopyFNAResponse {
-        val localVariableConfig = cmdCopyFNARequestConfig(cmdCopyFNA = cmdCopyFNA)
-
-        val localVarResponse = request<CmdCopyFNA, CmdCopyFNAResponse>(
-            localVariableConfig
-        )
+        val localVarResponse = cmdCopyFNAWithHttpInfo(cmdCopyFNA = cmdCopyFNA)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as CmdCopyFNAResponse
@@ -81,15 +88,35 @@ class CommandApi(
     }
 
     /**
-    * To obtain the request config of the operation cmdCopyFNA
-    *
-    * @param cmdCopyFNA  
-    * @return RequestConfig
-    */
+     * 
+     * 
+     * @param cmdCopyFNA 
+     * @return ApiResponse<CmdCopyFNAResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun cmdCopyFNAWithHttpInfo(cmdCopyFNA: CmdCopyFNA) : ApiResponse<CmdCopyFNAResponse?> {
+        val localVariableConfig = cmdCopyFNARequestConfig(cmdCopyFNA = cmdCopyFNA)
+
+        return request<CmdCopyFNA, CmdCopyFNAResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation cmdCopyFNA
+     *
+     * @param cmdCopyFNA 
+     * @return RequestConfig
+     */
     fun cmdCopyFNARequestConfig(cmdCopyFNA: CmdCopyFNA) : RequestConfig<CmdCopyFNA> {
         val localVariableBody = cmdCopyFNA
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
             method = RequestMethod.POST,

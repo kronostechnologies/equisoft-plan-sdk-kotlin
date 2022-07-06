@@ -20,15 +20,22 @@
 
 package com.equisoft.plan.sdk
 
+import java.io.IOException
+import okhttp3.OkHttpClient
+
 import com.equisoft.plan.sdk.models.ErrorResponse
 import com.equisoft.plan.sdk.models.PlansListPlansResponse
 
+import com.squareup.moshi.Json
+
 import com.equisoft.plan.sdk.infrastructure.ApiClient
+import com.equisoft.plan.sdk.infrastructure.ApiResponse
 import com.equisoft.plan.sdk.infrastructure.ClientException
 import com.equisoft.plan.sdk.infrastructure.ClientError
 import com.equisoft.plan.sdk.infrastructure.ServerException
 import com.equisoft.plan.sdk.infrastructure.ServerError
 import com.equisoft.plan.sdk.infrastructure.MultiValueMap
+import com.equisoft.plan.sdk.infrastructure.PartConfig
 import com.equisoft.plan.sdk.infrastructure.RequestConfig
 import com.equisoft.plan.sdk.infrastructure.RequestMethod
 import com.equisoft.plan.sdk.infrastructure.ResponseType
@@ -37,32 +44,32 @@ import com.equisoft.plan.sdk.infrastructure.toMultiValue
 
 class PlansApi(
     basePath: kotlin.String = defaultBasePath,
-    accessToken: String? = null
-) : ApiClient(basePath, accessToken) {
+    accessToken: String? = null,
+    client: OkHttpClient = ApiClient.defaultClient
+) : ApiClient(basePath, accessToken, client) {
+
     companion object {
         @JvmStatic
         val defaultBasePath: String by lazy {
-            System.getProperties().getProperty("com.equisoft.plan.sdk.baseUrl", "http://localhost")
+            System.getProperties().getProperty(ApiClient.baseUrlKey, "http://localhost")
         }
     }
 
     /**
-    * 
-    * 
-    * @param clientExternalUuid  (optional)
-    * @return PlansListPlansResponse
-    * @throws UnsupportedOperationException If the API returns an informational or redirection response
-    * @throws ClientException If the API returns a client error response
-    * @throws ServerException If the API returns a server error response
-    */
+     * 
+     * 
+     * @param clientExternalUuid  (optional)
+     * @return PlansListPlansResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
     @Suppress("UNCHECKED_CAST")
-    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun listPlans(clientExternalUuid: kotlin.String?) : PlansListPlansResponse {
-        val localVariableConfig = listPlansRequestConfig(clientExternalUuid = clientExternalUuid)
-
-        val localVarResponse = request<Unit, PlansListPlansResponse>(
-            localVariableConfig
-        )
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun listPlans(clientExternalUuid: kotlin.String? = null) : PlansListPlansResponse {
+        val localVarResponse = listPlansWithHttpInfo(clientExternalUuid = clientExternalUuid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as PlansListPlansResponse
@@ -80,20 +87,39 @@ class PlansApi(
     }
 
     /**
-    * To obtain the request config of the operation listPlans
-    *
-    * @param clientExternalUuid  (optional)
-    * @return RequestConfig
-    */
+     * 
+     * 
+     * @param clientExternalUuid  (optional)
+     * @return ApiResponse<PlansListPlansResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun listPlansWithHttpInfo(clientExternalUuid: kotlin.String?) : ApiResponse<PlansListPlansResponse?> {
+        val localVariableConfig = listPlansRequestConfig(clientExternalUuid = clientExternalUuid)
+
+        return request<Unit, PlansListPlansResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation listPlans
+     *
+     * @param clientExternalUuid  (optional)
+     * @return RequestConfig
+     */
     fun listPlansRequestConfig(clientExternalUuid: kotlin.String?) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
                 if (clientExternalUuid != null) {
                     put("clientExternalUuid", listOf(clientExternalUuid.toString()))
                 }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
             method = RequestMethod.GET,

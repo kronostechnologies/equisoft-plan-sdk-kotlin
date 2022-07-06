@@ -1,5 +1,5 @@
 group 'com.equisoft.plan.sdk'
-version '6.68.0'
+version '6.68.1-SNAPSHOT'
 
 wrapper {
     gradleVersion = '7.4.2'
@@ -40,4 +40,9 @@ dependencies {
     implementation "com.squareup.moshi:moshi-adapters:1.12.0"
     implementation "com.squareup.okhttp3:okhttp:4.9.1"
     testImplementation "io.kotlintest:kotlintest-runner-junit5:3.4.2"
+}
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+    }
 }

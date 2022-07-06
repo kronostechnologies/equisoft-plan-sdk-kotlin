@@ -20,16 +20,23 @@
 
 package com.equisoft.plan.sdk
 
+import java.io.IOException
+import okhttp3.OkHttpClient
+
 import com.equisoft.plan.sdk.models.ErrorResponse
 import com.equisoft.plan.sdk.models.UsersUser
 import com.equisoft.plan.sdk.models.UsersUserContext
 
+import com.squareup.moshi.Json
+
 import com.equisoft.plan.sdk.infrastructure.ApiClient
+import com.equisoft.plan.sdk.infrastructure.ApiResponse
 import com.equisoft.plan.sdk.infrastructure.ClientException
 import com.equisoft.plan.sdk.infrastructure.ClientError
 import com.equisoft.plan.sdk.infrastructure.ServerException
 import com.equisoft.plan.sdk.infrastructure.ServerError
 import com.equisoft.plan.sdk.infrastructure.MultiValueMap
+import com.equisoft.plan.sdk.infrastructure.PartConfig
 import com.equisoft.plan.sdk.infrastructure.RequestConfig
 import com.equisoft.plan.sdk.infrastructure.RequestMethod
 import com.equisoft.plan.sdk.infrastructure.ResponseType
@@ -38,32 +45,32 @@ import com.equisoft.plan.sdk.infrastructure.toMultiValue
 
 class UsersApi(
     basePath: kotlin.String = defaultBasePath,
-    accessToken: String? = null
-) : ApiClient(basePath, accessToken) {
+    accessToken: String? = null,
+    client: OkHttpClient = ApiClient.defaultClient
+) : ApiClient(basePath, accessToken, client) {
+
     companion object {
         @JvmStatic
         val defaultBasePath: String by lazy {
-            System.getProperties().getProperty("com.equisoft.plan.sdk.baseUrl", "http://localhost")
+            System.getProperties().getProperty(ApiClient.baseUrlKey, "http://localhost")
         }
     }
 
     /**
-    * 
-    * 
-    * @param id  
-    * @return UsersUser
-    * @throws UnsupportedOperationException If the API returns an informational or redirection response
-    * @throws ClientException If the API returns a client error response
-    * @throws ServerException If the API returns a server error response
-    */
+     * 
+     * 
+     * @param id 
+     * @return UsersUser
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
     @Suppress("UNCHECKED_CAST")
-    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
     fun getUser(id: kotlin.Int) : UsersUser {
-        val localVariableConfig = getUserRequestConfig(id = id)
-
-        val localVarResponse = request<Unit, UsersUser>(
-            localVariableConfig
-        )
+        val localVarResponse = getUserWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as UsersUser
@@ -81,15 +88,34 @@ class UsersApi(
     }
 
     /**
-    * To obtain the request config of the operation getUser
-    *
-    * @param id  
-    * @return RequestConfig
-    */
+     * 
+     * 
+     * @param id 
+     * @return ApiResponse<UsersUser?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getUserWithHttpInfo(id: kotlin.Int) : ApiResponse<UsersUser?> {
+        val localVariableConfig = getUserRequestConfig(id = id)
+
+        return request<Unit, UsersUser>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getUser
+     *
+     * @param id 
+     * @return RequestConfig
+     */
     fun getUserRequestConfig(id: kotlin.Int) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
             method = RequestMethod.GET,
@@ -101,21 +127,19 @@ class UsersApi(
     }
 
     /**
-    * 
-    * 
-    * @return UsersUserContext
-    * @throws UnsupportedOperationException If the API returns an informational or redirection response
-    * @throws ClientException If the API returns a client error response
-    * @throws ServerException If the API returns a server error response
-    */
+     * 
+     * 
+     * @return UsersUserContext
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
     @Suppress("UNCHECKED_CAST")
-    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
     fun getUserContext() : UsersUserContext {
-        val localVariableConfig = getUserContextRequestConfig()
-
-        val localVarResponse = request<Unit, UsersUserContext>(
-            localVariableConfig
-        )
+        val localVarResponse = getUserContextWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as UsersUserContext
@@ -133,14 +157,32 @@ class UsersApi(
     }
 
     /**
-    * To obtain the request config of the operation getUserContext
-    *
-    * @return RequestConfig
-    */
+     * 
+     * 
+     * @return ApiResponse<UsersUserContext?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getUserContextWithHttpInfo() : ApiResponse<UsersUserContext?> {
+        val localVariableConfig = getUserContextRequestConfig()
+
+        return request<Unit, UsersUserContext>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getUserContext
+     *
+     * @return RequestConfig
+     */
     fun getUserContextRequestConfig() : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
             method = RequestMethod.GET,

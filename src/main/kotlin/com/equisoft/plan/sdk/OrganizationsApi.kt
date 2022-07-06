@@ -20,17 +20,24 @@
 
 package com.equisoft.plan.sdk
 
+import java.io.IOException
+import okhttp3.OkHttpClient
+
 import com.equisoft.plan.sdk.models.ErrorResponse
 import com.equisoft.plan.sdk.models.OrganizationsListOrganizationsResponse
 import com.equisoft.plan.sdk.models.OrganizationsOrganization
 import com.equisoft.plan.sdk.models.UsersListUsersResponse
 
+import com.squareup.moshi.Json
+
 import com.equisoft.plan.sdk.infrastructure.ApiClient
+import com.equisoft.plan.sdk.infrastructure.ApiResponse
 import com.equisoft.plan.sdk.infrastructure.ClientException
 import com.equisoft.plan.sdk.infrastructure.ClientError
 import com.equisoft.plan.sdk.infrastructure.ServerException
 import com.equisoft.plan.sdk.infrastructure.ServerError
 import com.equisoft.plan.sdk.infrastructure.MultiValueMap
+import com.equisoft.plan.sdk.infrastructure.PartConfig
 import com.equisoft.plan.sdk.infrastructure.RequestConfig
 import com.equisoft.plan.sdk.infrastructure.RequestMethod
 import com.equisoft.plan.sdk.infrastructure.ResponseType
@@ -39,32 +46,32 @@ import com.equisoft.plan.sdk.infrastructure.toMultiValue
 
 class OrganizationsApi(
     basePath: kotlin.String = defaultBasePath,
-    accessToken: String? = null
-) : ApiClient(basePath, accessToken) {
+    accessToken: String? = null,
+    client: OkHttpClient = ApiClient.defaultClient
+) : ApiClient(basePath, accessToken, client) {
+
     companion object {
         @JvmStatic
         val defaultBasePath: String by lazy {
-            System.getProperties().getProperty("com.equisoft.plan.sdk.baseUrl", "http://localhost")
+            System.getProperties().getProperty(ApiClient.baseUrlKey, "http://localhost")
         }
     }
 
     /**
-    * 
-    * 
-    * @param id  
-    * @return OrganizationsOrganization
-    * @throws UnsupportedOperationException If the API returns an informational or redirection response
-    * @throws ClientException If the API returns a client error response
-    * @throws ServerException If the API returns a server error response
-    */
+     * 
+     * 
+     * @param id 
+     * @return OrganizationsOrganization
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
     @Suppress("UNCHECKED_CAST")
-    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
     fun getOrganization(id: kotlin.Int) : OrganizationsOrganization {
-        val localVariableConfig = getOrganizationRequestConfig(id = id)
-
-        val localVarResponse = request<Unit, OrganizationsOrganization>(
-            localVariableConfig
-        )
+        val localVarResponse = getOrganizationWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as OrganizationsOrganization
@@ -82,15 +89,34 @@ class OrganizationsApi(
     }
 
     /**
-    * To obtain the request config of the operation getOrganization
-    *
-    * @param id  
-    * @return RequestConfig
-    */
+     * 
+     * 
+     * @param id 
+     * @return ApiResponse<OrganizationsOrganization?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getOrganizationWithHttpInfo(id: kotlin.Int) : ApiResponse<OrganizationsOrganization?> {
+        val localVariableConfig = getOrganizationRequestConfig(id = id)
+
+        return request<Unit, OrganizationsOrganization>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getOrganization
+     *
+     * @param id 
+     * @return RequestConfig
+     */
     fun getOrganizationRequestConfig(id: kotlin.Int) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
             method = RequestMethod.GET,
@@ -102,22 +128,20 @@ class OrganizationsApi(
     }
 
     /**
-    * 
-    * 
-    * @param id  
-    * @return UsersListUsersResponse
-    * @throws UnsupportedOperationException If the API returns an informational or redirection response
-    * @throws ClientException If the API returns a client error response
-    * @throws ServerException If the API returns a server error response
-    */
+     * 
+     * 
+     * @param id 
+     * @return UsersListUsersResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
     @Suppress("UNCHECKED_CAST")
-    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
     fun listOrganizationUsers(id: kotlin.Int) : UsersListUsersResponse {
-        val localVariableConfig = listOrganizationUsersRequestConfig(id = id)
-
-        val localVarResponse = request<Unit, UsersListUsersResponse>(
-            localVariableConfig
-        )
+        val localVarResponse = listOrganizationUsersWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as UsersListUsersResponse
@@ -135,15 +159,34 @@ class OrganizationsApi(
     }
 
     /**
-    * To obtain the request config of the operation listOrganizationUsers
-    *
-    * @param id  
-    * @return RequestConfig
-    */
+     * 
+     * 
+     * @param id 
+     * @return ApiResponse<UsersListUsersResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun listOrganizationUsersWithHttpInfo(id: kotlin.Int) : ApiResponse<UsersListUsersResponse?> {
+        val localVariableConfig = listOrganizationUsersRequestConfig(id = id)
+
+        return request<Unit, UsersListUsersResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation listOrganizationUsers
+     *
+     * @param id 
+     * @return RequestConfig
+     */
     fun listOrganizationUsersRequestConfig(id: kotlin.Int) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
             method = RequestMethod.GET,
@@ -155,22 +198,20 @@ class OrganizationsApi(
     }
 
     /**
-    * 
-    * 
-    * @param organizationUuid  
-    * @return OrganizationsListOrganizationsResponse
-    * @throws UnsupportedOperationException If the API returns an informational or redirection response
-    * @throws ClientException If the API returns a client error response
-    * @throws ServerException If the API returns a server error response
-    */
+     * 
+     * 
+     * @param organizationUuid 
+     * @return OrganizationsListOrganizationsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
     @Suppress("UNCHECKED_CAST")
-    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
     fun listOrganizations(organizationUuid: kotlin.String) : OrganizationsListOrganizationsResponse {
-        val localVariableConfig = listOrganizationsRequestConfig(organizationUuid = organizationUuid)
-
-        val localVarResponse = request<Unit, OrganizationsListOrganizationsResponse>(
-            localVariableConfig
-        )
+        val localVarResponse = listOrganizationsWithHttpInfo(organizationUuid = organizationUuid)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as OrganizationsListOrganizationsResponse
@@ -188,18 +229,37 @@ class OrganizationsApi(
     }
 
     /**
-    * To obtain the request config of the operation listOrganizations
-    *
-    * @param organizationUuid  
-    * @return RequestConfig
-    */
+     * 
+     * 
+     * @param organizationUuid 
+     * @return ApiResponse<OrganizationsListOrganizationsResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun listOrganizationsWithHttpInfo(organizationUuid: kotlin.String) : ApiResponse<OrganizationsListOrganizationsResponse?> {
+        val localVariableConfig = listOrganizationsRequestConfig(organizationUuid = organizationUuid)
+
+        return request<Unit, OrganizationsListOrganizationsResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation listOrganizations
+     *
+     * @param organizationUuid 
+     * @return RequestConfig
+     */
     fun listOrganizationsRequestConfig(organizationUuid: kotlin.String) : RequestConfig<Unit> {
         val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, List<kotlin.String>>()
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
                 put("organizationUuid", listOf(organizationUuid.toString()))
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
             method = RequestMethod.GET,

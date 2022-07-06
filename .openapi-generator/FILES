@@ -29,7 +29,7 @@ src/main/kotlin/com/equisoft/plan/sdk/PlansV1Api.kt
 src/main/kotlin/com/equisoft/plan/sdk/UsersApi.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/ApiAbstractions.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/ApiClient.kt
-src/main/kotlin/com/equisoft/plan/sdk/infrastructure/ApiInfrastructureResponse.kt
+src/main/kotlin/com/equisoft/plan/sdk/infrastructure/ApiResponse.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/BigDecimalAdapter.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/BigIntegerAdapter.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/ByteArrayAdapter.kt
@@ -37,6 +37,7 @@ src/main/kotlin/com/equisoft/plan/sdk/infrastructure/Errors.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/LocalDateAdapter.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/LocalDateTimeAdapter.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/OffsetDateTimeAdapter.kt
+src/main/kotlin/com/equisoft/plan/sdk/infrastructure/PartConfig.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/RequestConfig.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/RequestMethod.kt
 src/main/kotlin/com/equisoft/plan/sdk/infrastructure/ResponseExtensions.kt

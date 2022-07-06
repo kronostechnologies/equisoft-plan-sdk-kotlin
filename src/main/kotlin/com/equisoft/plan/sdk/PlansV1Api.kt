@@ -20,14 +20,21 @@
 
 package com.equisoft.plan.sdk
 
+import java.io.IOException
+import okhttp3.OkHttpClient
+
 import com.equisoft.plan.sdk.models.V1ErrorResponse
 
+import com.squareup.moshi.Json
+
 import com.equisoft.plan.sdk.infrastructure.ApiClient
+import com.equisoft.plan.sdk.infrastructure.ApiResponse
 import com.equisoft.plan.sdk.infrastructure.ClientException
 import com.equisoft.plan.sdk.infrastructure.ClientError
 import com.equisoft.plan.sdk.infrastructure.ServerException
 import com.equisoft.plan.sdk.infrastructure.ServerError
 import com.equisoft.plan.sdk.infrastructure.MultiValueMap
+import com.equisoft.plan.sdk.infrastructure.PartConfig
 import com.equisoft.plan.sdk.infrastructure.RequestConfig
 import com.equisoft.plan.sdk.infrastructure.RequestMethod
 import com.equisoft.plan.sdk.infrastructure.ResponseType
@@ -36,31 +43,31 @@ import com.equisoft.plan.sdk.infrastructure.toMultiValue
 
 class PlansV1Api(
     basePath: kotlin.String = defaultBasePath,
-    accessToken: String? = null
-) : ApiClient(basePath, accessToken) {
+    accessToken: String? = null,
+    client: OkHttpClient = ApiClient.defaultClient
+) : ApiClient(basePath, accessToken, client) {
+
     companion object {
         @JvmStatic
         val defaultBasePath: String by lazy {
-            System.getProperties().getProperty("com.equisoft.plan.sdk.baseUrl", "http://localhost")
+            System.getProperties().getProperty(ApiClient.baseUrlKey, "http://localhost")
         }
     }
 
     /**
-    * Returns the plan
-    * 
-    * @param id Fna id 
-    * @return void
-    * @throws UnsupportedOperationException If the API returns an informational or redirection response
-    * @throws ClientException If the API returns a client error response
-    * @throws ServerException If the API returns a server error response
-    */
-    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+     * Returns the plan
+     * 
+     * @param id Fna id
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
     fun getPlan(id: kotlin.Int) : Unit {
-        val localVariableConfig = getPlanRequestConfig(id = id)
-
-        val localVarResponse = request<Unit, Unit>(
-            localVariableConfig
-        )
+        val localVarResponse = getPlanWithHttpInfo(id = id)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -78,16 +85,33 @@ class PlansV1Api(
     }
 
     /**
-    * To obtain the request config of the operation getPlan
-    *
-    * @param id Fna id 
-    * @return RequestConfig
-    */
+     * Returns the plan
+     * 
+     * @param id Fna id
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getPlanWithHttpInfo(id: kotlin.Int) : ApiResponse<Unit?> {
+        val localVariableConfig = getPlanRequestConfig(id = id)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getPlan
+     *
+     * @param id Fna id
+     * @return RequestConfig
+     */
     fun getPlanRequestConfig(id: kotlin.Int) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-
+        
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/fna/api/fna/{id}".replace("{"+"id"+"}", "$id"),
@@ -98,23 +122,21 @@ class PlansV1Api(
     }
 
     /**
-    * Update client UUID id of an FNA
-    * 
-    * @param fnaUuid UUID of the FNA 
-    * @param clientUuid UUID of the client to update 
-    * @param body New UUID of the client 
-    * @return void
-    * @throws UnsupportedOperationException If the API returns an informational or redirection response
-    * @throws ClientException If the API returns a client error response
-    * @throws ServerException If the API returns a server error response
-    */
-    @Throws(UnsupportedOperationException::class, ClientException::class, ServerException::class)
+     * Update client UUID id of an FNA
+     * 
+     * @param fnaUuid UUID of the FNA
+     * @param clientUuid UUID of the client to update
+     * @param body New UUID of the client
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
     fun updatePlanExternalId(fnaUuid: kotlin.String, clientUuid: kotlin.String, body: kotlin.String) : Unit {
-        val localVariableConfig = updatePlanExternalIdRequestConfig(fnaUuid = fnaUuid, clientUuid = clientUuid, body = body)
-
-        val localVarResponse = request<kotlin.String, Unit>(
-            localVariableConfig
-        )
+        val localVarResponse = updatePlanExternalIdWithHttpInfo(fnaUuid = fnaUuid, clientUuid = clientUuid, body = body)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> Unit
@@ -132,17 +154,37 @@ class PlansV1Api(
     }
 
     /**
-    * To obtain the request config of the operation updatePlanExternalId
-    *
-    * @param fnaUuid UUID of the FNA 
-    * @param clientUuid UUID of the client to update 
-    * @param body New UUID of the client 
-    * @return RequestConfig
-    */
+     * Update client UUID id of an FNA
+     * 
+     * @param fnaUuid UUID of the FNA
+     * @param clientUuid UUID of the client to update
+     * @param body New UUID of the client
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun updatePlanExternalIdWithHttpInfo(fnaUuid: kotlin.String, clientUuid: kotlin.String, body: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = updatePlanExternalIdRequestConfig(fnaUuid = fnaUuid, clientUuid = clientUuid, body = body)
+
+        return request<kotlin.String, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation updatePlanExternalId
+     *
+     * @param fnaUuid UUID of the FNA
+     * @param clientUuid UUID of the client to update
+     * @param body New UUID of the client
+     * @return RequestConfig
+     */
     fun updatePlanExternalIdRequestConfig(fnaUuid: kotlin.String, clientUuid: kotlin.String, body: kotlin.String) : RequestConfig<kotlin.String> {
         val localVariableBody = body
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(
             method = RequestMethod.PUT,
